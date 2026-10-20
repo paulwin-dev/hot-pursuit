@@ -1,0 +1,87 @@
+:root{
+  --bg:#0f1724; --panel:#17233a; --line:#2a3b5c; --text:#e8eefc; --muted:#8fa0c4;
+  --hunter:#ff5d3a; --runner:#35d6c4; --caught:#7d8799; --me:#4d8dff;
+  --r:14px; font-family:'Archivo',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text)}
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+[hidden]{display:none!important}
+h1,h2,h3{margin:0}
+.view{max-width:460px;margin:0 auto;padding:28px 20px 40px;display:flex;flex-direction:column;gap:18px;min-height:100%}
+.view.wide{max-width:560px}
+.logo{font-size:clamp(76px,26vw,128px);font-weight:900;font-stretch:62%;line-height:.82;letter-spacing:-.02em;margin-top:8vh;color:var(--hunter)}
+.lead{color:var(--muted);font-size:17px;line-height:1.45;max-width:30ch;margin:0}
+.stack{display:flex;flex-direction:column;gap:12px;margin-top:auto}
+.btn{font:inherit;font-weight:700;font-size:18px;padding:16px;border-radius:var(--r);border:2px solid var(--line);background:var(--panel);color:var(--text);cursor:pointer;width:100%}
+.btn.primary{background:var(--hunter);border-color:var(--hunter);color:#1a0903}
+.btn.danger{background:#b3261e;border-color:#b3261e;color:#fff}
+.btn.ghost{background:transparent;color:var(--muted);font-weight:600;font-size:15px;padding:12px}
+.btn.small{padding:8px;font-size:13px}
+.btn:disabled{opacity:.5}
+.btn:focus-visible,.field:focus-visible,input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--me);outline-offset:2px}
+.back{align-self:flex-start;background:none;border:0;color:var(--muted);font:inherit;font-size:16px;padding:4px 0;cursor:pointer}
+.field,input,select{font:inherit;font-size:20px;padding:14px;border-radius:12px;border:2px solid var(--line);background:#0b1220;color:var(--text);width:100%}
+.code-field{text-align:center;font-size:44px;font-weight:900;font-stretch:75%;letter-spacing:.3em;text-transform:uppercase;padding-left:.6em}
+.muted{color:var(--muted)} .small{font-size:13px} .center{text-align:center}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:12px}
+.panel h3{font-size:16px}
+.lobby-head{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.code{font-size:72px;font-weight:900;font-stretch:62%;letter-spacing:.04em;line-height:1;color:var(--hunter)}
+#qr{background:#fff;padding:8px;border-radius:12px;line-height:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
+label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
+label input{font-size:18px;padding:10px}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{font:inherit;font-weight:600;padding:10px;background:transparent;color:var(--muted);border:0;cursor:pointer}
+.seg button.on{background:var(--text);color:var(--bg)}
+.plist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.plist li{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
+.plist .name{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.plist select{width:auto;font-size:15px;padding:6px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--runner);flex:none}
+.dot.off{background:var(--caught)}
+.chip{display:inline-block;padding:4px 10px;border-radius:99px;border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--muted)}
+.chip.hunter{background:var(--hunter);border-color:var(--hunter);color:#1a0903}
+.chip.runner{background:var(--runner);border-color:var(--runner);color:#04211d}
+.chip.ok{color:var(--runner);border-color:var(--runner)}
+.chip.bad{color:var(--hunter);border-color:var(--hunter)}
+
+/* game */
+.game{max-width:none;padding:0;gap:0;position:fixed;inset:0;display:block;min-height:0}
+#map{position:absolute;inset:0;background:#0b1220}
+.hud{position:absolute;z-index:500;top:calc(env(safe-area-inset-top) + 8px);left:8px;right:8px;display:flex;align-items:center;gap:8px;background:rgba(15,23,36,.92);border:1px solid var(--line);border-radius:var(--r);padding:8px 12px}
+.hud .chip{margin-right:auto}
+.clock{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.clock small{font-size:11px;color:var(--muted)}
+.clock b{font-size:26px;font-weight:800;font-stretch:75%;font-variant-numeric:tabular-nums}
+.mapbtns{position:absolute;z-index:500;right:8px;top:calc(env(safe-area-inset-top) + 78px);display:flex;flex-direction:column;gap:8px}
+.roundbtn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(15,23,36,.92);color:var(--text);font:inherit;font-weight:700;cursor:pointer}
+.dock{position:absolute;z-index:500;left:8px;right:8px;bottom:calc(env(safe-area-inset-bottom) + 8px);background:rgba(15,23,36,.95);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:10px;max-height:42vh;overflow:auto}
+.dock-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.runners{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.runners li{font-size:13px;padding:3px 10px;border-radius:99px;background:rgba(53,214,196,.15);color:var(--runner)}
+.runners li.out{background:rgba(125,135,153,.15);color:var(--caught);text-decoration:line-through}
+.pin{background:var(--runner);border:3px solid #fff;border-radius:50%}
+.leaflet-tooltip.nm{background:rgba(15,23,36,.92);color:var(--text);border:1px solid var(--line);font:700 12px 'Archivo',sans-serif}
+.overlay{position:fixed;inset:0;z-index:2000;background:rgba(5,9,16,.8);display:grid;place-items:center;padding:20px}
+.overlay .panel{max-width:380px;width:100%}
+#toasts{position:fixed;z-index:3000;top:calc(env(safe-area-inset-top) + 76px);left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.toast{background:var(--text);color:var(--bg);font-weight:700;padding:12px 18px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.4);max-width:90vw}
+.toast.warn{background:var(--hunter);color:#1a0903}
+.toast.err{background:#b3261e;color:#fff}
+@media (prefers-reduced-motion:no-preference){.toast{animation:pop .25s ease-out}@keyframes pop{from{transform:translateY(-8px);opacity:0}}}
+
+/* Inputs: force visible text regardless of font/theme quirks */
+input,select,.field{
+  color:#fff!important;-webkit-text-fill-color:#fff;caret-color:#fff;
+  background-color:#0b1220;opacity:1;text-indent:0;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-stretch:100%;
+}
+input::placeholder{color:#6b7a99;-webkit-text-fill-color:#6b7a99;opacity:1}
+.code-field{font-weight:800}
+
+/* Instantly turn standard OpenStreetMap tiles into a dark theme */
+.leaflet-tile-pane img {
+  filter: invert(100%) hue-rotate(180deg) brightness(90%) contrast(90%);
+}

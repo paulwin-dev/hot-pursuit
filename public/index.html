@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101826">
+<title>Manhunt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="toasts" aria-live="polite"></div>
+
+<main id="v-home" class="view">
+  <h1 class="logo">Man<br>hunt</h1>
+  <p class="lead">Real-world tag with a live map. Runners hide, hunters get their positions every few minutes.</p>
+  <div class="stack">
+    <button class="btn primary" id="goJoin">Join game</button>
+    <button class="btn" id="goHost">Host game</button>
+  </div>
+</main>
+
+<main id="v-code" class="view" hidden>
+  <button class="back" data-back>Back</button>
+  <h2>Enter game code</h2>
+  <input id="codeInput" class="field code-field" maxlength="4" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="ABCD">
+  <button class="btn primary" id="codeNext">Continue</button>
+</main>
+
+<main id="v-name" class="view" hidden>
+  <button class="back" data-back>Back</button>
+  <h2 id="nameTitle">Your name</h2>
+  <input id="nameInput" class="field" maxlength="20" autocomplete="nickname" placeholder="Name">
+  <button class="btn primary" id="nameNext">Continue</button>
+</main>
+
+<main id="v-lobby" class="view wide" hidden>
+  <header class="lobby-head">
+    <div>
+      <div class="muted">Game code</div>
+      <div id="lobbyCode" class="code"></div>
+      <div class="muted small" id="shareUrl"></div>
+    </div>
+    <div id="qr"></div>
+  </header>
+
+  <section class="panel" id="cfg">
+    <h3>Settings</h3>
+    <div class="seg" id="cfgMode">
+      <button data-mode="random">Random roles</button>
+      <button data-mode="manual">Pick roles</button>
+    </div>
+    <div class="grid">
+      <label id="rowHunters">Hunters<input id="cfgHunters" type="number" min="1" max="29" inputmode="numeric"></label>
+      <label>Total time (min)<input id="cfgTotal" type="number" min="1" max="600" inputmode="numeric"></label>
+      <label>Reveal every (min)<input id="cfgReveal" type="number" min="1" max="120" inputmode="numeric"></label>
+    </div>
+    <button class="btn ghost" id="btnShuffle">Shuffle roles</button>
+  </section>
+
+  <section class="panel">
+    <h3>Players (<span id="pc">0</span>)</h3>
+    <ul id="plist" class="plist"></ul>
+  </section>
+
+  <div class="stack">
+    <button class="btn primary" id="btnStart">Start game</button>
+    <p id="waiting" class="muted center">Waiting for the host to start.</p>
+    <div id="gpsLobby" class="chip"></div>
+    <button class="btn ghost" id="btnLeave">Leave game</button>
+  </div>
+</main>
+
+<main id="v-game" class="view game" hidden>
+  <div id="map"></div>
+  <header class="hud">
+    <span id="roleChip" class="chip"></span>
+    <div class="clock"><small>Time left</small><b id="timeLeft">--:--</b></div>
+    <div class="clock"><small>Next reveal</small><b id="nextReveal">--:--</b></div>
+  </header>
+  <div class="mapbtns">
+    <button id="btnFit" class="roundbtn" aria-label="Fit map to players">Fit</button>
+    <button id="btnMe" class="roundbtn" aria-label="Centre on me">Me</button>
+  </div>
+  <footer class="dock">
+    <div class="dock-row">
+      <div><b id="freeCount"></b> <span class="muted" id="lastReveal"></span></div>
+      <span id="gpsGame" class="chip"></span>
+    </div>
+    <ul id="runnerList" class="runners"></ul>
+    <button id="btnCaught" class="btn danger" hidden>I was caught</button>
+    <button id="btnEnd" class="btn ghost small" hidden>End game</button>
+  </footer>
+</main>
+
+<div id="endOverlay" class="overlay" hidden>
+  <div class="panel center">
+    <h2 id="endTitle"></h2>
+    <p id="endText" class="muted"></p>
+    <button class="btn primary" id="btnHome">Back to home</button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="app.js" defer></script>
+</body>
+</html>
